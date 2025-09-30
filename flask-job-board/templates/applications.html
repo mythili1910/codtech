@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Applications for {{ job.title }}</h2>
+<ul>
+  {% for app in apps %}
+    <li>{{ app.candidate.name }} - <a href="{{ url_for('static', filename='resumes/' ~ app.resume) }}" target="_blank">Resume</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+
+{% if current_user.role == "employer" %}
+  <h4>Post a Job</h4>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.title.label }} {{ form.title }}<br>
+    {{ form.company.label }} {{ form.company }}<br>
+    {{ form.location.label }} {{ form.location }}<br>
+    {{ form.salary.label }} {{ form.salary }}<br>
+    {{ form.description.label }} {{ form.description }}<br>
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+
+  <h4 class="mt-4">Your Jobs</h4>
+  <ul>
+    {% for job in jobs %}
+      <li>{{ job.title }} - <a href="{{ url_for('applications', job_id=job.id) }}">View Applications</a></li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h4>Your Applications</h4>
+  <ul>
+    {% for app in jobs %}
+      <li>{{ app.job.title }} ({{ app.job.company }}) - Resume: {{ app.resume }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

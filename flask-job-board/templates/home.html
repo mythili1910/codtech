@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Board</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      /* Gradient background */
+      background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #102a43;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #334e68;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to JobFinder</h1>
+    <p>Discover your next opportunity with ease. Browse jobs from top companies and apply directly online.</p>
+    {% extends "base.html" %}
+{% block content %}
+<h2>Available Jobs</h2>
+<div class="row">
+  {% for job in jobs %}
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5>{{ job.title }}</h5>
+          <p>{{ job.company }} - {{ job.location }}</p>
+          <a href="{{ url_for('job_detail', job_id=job.id) }}" class="btn btn-primary btn-sm">View</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+  </div>
+</body>
+
+</html>
